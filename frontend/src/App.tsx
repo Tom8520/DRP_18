@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
+import MainPage from './pages/MainPage';
 import axios from 'axios';
 
 const client = axios.create({
@@ -27,6 +28,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<LandingPage />}/>
+      <Route path="/main" element={<MainPage />}/>
     </Routes>
   </BrowserRouter>  
   );
