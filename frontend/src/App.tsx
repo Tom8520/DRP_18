@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
 import axios from 'axios';
 
 const client = axios.create({
@@ -9,36 +11,24 @@ const client = axios.create({
 
 function App() {
 
-  const [testStuff, setTestStuff] = useState<String>("Not from backend");
+  // const [testStuff, setTestStuff] = useState<String>("Not from backend");
 
-  useEffect(() => {
-    client.get("/api").then(response => {
-      setTestStuff(response.data);
-      console.log(response.data);
-    }).catch(error => {
-      console.log("ERROR!")
-      console.log(error);
-    })
-  })
+  // useEffect(() => {
+  //   client.get("/api").then(response => {
+  //     setTestStuff(response.data);
+  //     console.log(response.data);
+  //   }).catch(error => {
+  //     console.log("ERROR!")
+  //     console.log(error);
+  //   })
+  // })
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <p>Fetched from backend: {testStuff}</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<LandingPage />}/>
+    </Routes>
+  </BrowserRouter>  
   );
 }
 
