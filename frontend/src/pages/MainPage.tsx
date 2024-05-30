@@ -1,6 +1,8 @@
 import React, {ChangeEventHandler,useState} from 'react';
-import { Link } from 'react-router-dom';
 import './../styles/Landing.css';
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
 
 const UploadImagePage = () => {
 
@@ -27,13 +29,23 @@ const UploadImagePage = () => {
 
   return (
       <div>
+        <Navbar bg="primary" data-bs-theme="dark">
+          <Container>
+            <Navbar.Brand href="">AI Diagram Tool</Navbar.Brand>
+            <Nav className="me-auto">
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/main">Upload</Nav.Link>
+              <Nav.Link href="/login">Log In</Nav.Link>
+            </Nav>
+          </Container>
+        </Navbar>
+        <br></br>
         <div className="header">
-          <h1>Camera</h1>
+          <h1 className='stylish-header'>AI Diagram Tool</h1>
         </div>
-        <div className="container">
-          <p className="description"></p>
+        <div className="div-container">
           <div className="button-container">
-            <Link to="/login" className="styled-button">Login</Link>
+            <button className="styled-button">Camera</button>
           </div>  
           <div className="button-container">
             <input id="file-upload" onChange={e => handleUploadImage(e)} type="file" accept="image/*" hidden/>
