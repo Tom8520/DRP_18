@@ -14,7 +14,7 @@ const LandingPage = () => {
         <Container>
           <Navbar.Brand href="">AI Diagram Tool</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="">Home</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/main">Upload</Nav.Link>
             <Nav.Link href="/login">Log In</Nav.Link>
           </Nav>
@@ -22,7 +22,7 @@ const LandingPage = () => {
       </Navbar>
       <br></br>
       <div className="header">
-        <h1 className='stylish-header'>Diagram Tool</h1>
+        <h1 className='stylish-header'>AI Diagram Tool</h1>
         <h3>Make diagrams easier to understand with the power of AI and AR.</h3>
       </div>
       <div className="div-container">
