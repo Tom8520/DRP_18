@@ -28,10 +28,9 @@ const UploadImagePage = () => {
   return (
       <div>
         <div className="header">
-          <h1>Camera</h1>
+          <h1 className='stylish-header'>Camera</h1>
         </div>
-        <div className="container">
-          <p className="description"></p>
+        <div className="div-container">
           <div className="button-container">
             <Link to="/login" className="styled-button">Login</Link>
           </div>  

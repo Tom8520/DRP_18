@@ -16,7 +16,7 @@ body {
     width: 100%;
   }
   
-  .container {
+  .div-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,5 +74,21 @@ body {
     .box {
       margin: 20px 0;
     }
+  }
+  
+  .stylish-header {
+      font-size: 3em; /* Large font size */
+      font-weight: 300; /* Light weight for a modern look */
+      color: #333; /* Dark text color */
+      padding: 10px 20px; /* Padding around the text */
+      border-bottom: 2px solid #333; /* Simple underline */
+      letter-spacing: 1px; /* Slight space between letters */
+      transition: color 0.3s, border-color 0.3s; /* Smooth transition for hover effects */
+      text-align: center;
+  }
+  
+  .stylish-header:hover {
+      color: #555; /* Slightly lighter text color on hover */
+      border-color: #555; /* Slightly lighter underline color on hover */
   }
   
