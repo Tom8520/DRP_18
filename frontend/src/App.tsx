@@ -3,8 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
-import MainPage from './pages/MainPage';
 import axios from 'axios';
+import UploadImagePage from './pages/MainPage';
 
 const client = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL 
@@ -28,7 +28,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<LandingPage />}/>
-      <Route path="/main" element={<MainPage />}/>
+      <Route path="/main" element={<UploadImagePage />}/>
     </Routes>
   </BrowserRouter>  
   );

@@ -2,7 +2,11 @@ import React from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import './../styles/Landing.css';
 
-const MainPage = () => {
+const UploadImagePage = () => {
+
+  const handleUploadImage = () => {
+    
+  }
 
     return (
       <div>
@@ -15,7 +19,7 @@ const MainPage = () => {
             <Link to="/login" className="styled-button">Login</Link>
           </div>  
           <div className="button-container">
-            <Link to="/" className="styled-button">Upload Image</Link>
+            <button className="styled-button" onClick={handleUploadImage}>Upload Image</button>
           </div>
         </div>
         <div className="imageContainer">
@@ -24,4 +28,4 @@ const MainPage = () => {
     );
   };
 
-export default MainPage;
+export default UploadImagePage;
