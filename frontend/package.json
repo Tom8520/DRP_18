@@ -31,7 +31,7 @@
       "react-app/jest"
     ],
     "rules": {
-      "@jsx-a11y/img-redundant-alt": "off"
+      "jsx-a11y/img-redundant-alt": "off"
     }
   },
   "browserslist": {
