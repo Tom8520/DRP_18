@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
-import axios from 'axios';
 import UploadImagePage from './pages/MainPage';
-
-const client = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL 
-});
 
 function App() {
 
