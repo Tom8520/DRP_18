@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import './../styles/Landing.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../components/NavBar';
-import client from '../client/client';
 
 const UserAccountPage = () => {
 
-  const [username, setUsername] = useState('')
+  const [username] = useState('')
 
   // useEffect(() => {
   //   // Send JWT token and retrieve data

@@ -28,7 +28,7 @@ const LoginPage = () => {
     }
 
     client.post("/signup", user).then(response => {
-      if (response.status != 200) {
+      if (response.status !== 200) {
         setCreateAccountError("You moron");
       } else {
         setCreateAccountError('');
@@ -42,17 +42,13 @@ const LoginPage = () => {
 
   const handleLogin = (e: any) => {
     e.preventDefault();
-    const user = {
-      email: loginEmail,
-      password: loginPassword
-    }
 
     client.get("/login", {params: {
       email: loginEmail,
       password: loginPassword,
     }
   }).then(response => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         setLoginError('');
         setLoginSuccess(true);
       } else {
@@ -69,12 +65,14 @@ const LoginPage = () => {
     if (loginSuccess) {
       navigate("/user");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loginSuccess]);
 
   useEffect(() => {
     if (createAccountSuccess) {
       navigate("/user");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createAccountSuccess]);
 
   return (
