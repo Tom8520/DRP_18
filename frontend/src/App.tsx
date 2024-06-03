@@ -3,6 +3,9 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import UploadImagePage from './pages/MainPage';
+import LoginPage from './pages/LoginPage';
+import ErrorPage from './pages/ErrorPage';
+import UserAccountPage from './pages/UserAccountPage';
 
 function App() {
 
@@ -23,6 +26,9 @@ function App() {
     <Routes>
       <Route path="/" element={<LandingPage />}/>
       <Route path="/main" element={<UploadImagePage />}/>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/user" element={<UserAccountPage />} />
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   </BrowserRouter>  
   );
