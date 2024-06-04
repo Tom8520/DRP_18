@@ -2,6 +2,7 @@ import os
 from flask import request
 from flask_cors import CORS, cross_origin
 
+from utils import verify_jwt_token
 from controllers import list_all_users_controller, create_account_controller, login_controller
 from __init__ import create_app
 from dotenv import load_dotenv
@@ -28,6 +29,12 @@ def create_account():
 @cross_origin(supports_credentials=True)
 def login():
     return login_controller()
+
+
+@app.route("/api/secret", methods=['GET', 'POST'])
+@verify_jwt_token
+def get_secret(user):
+    return "secret {}".format(user)
 
 
 if __name__ == '__main__':

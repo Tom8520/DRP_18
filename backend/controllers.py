@@ -8,6 +8,7 @@ import uuid
 from sqlalchemy.exc import IntegrityError
 
 from __init__ import db
+from utils import generate_jwt_token
 from models import User
 import jwt
 
@@ -52,17 +53,6 @@ def create_account_controller():
         return jsonify({'error': 'Invalid Credentials'}), 401
 
 
-def generate_jwt_token(user):
-    return jwt.encode(
-        {
-            'id': user.id,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1),
-        },
-        os.getenv('JWT_SECRET'),
-        algorithm='HS256',
-    )
-
-
 def login_controller():
     request_form = request.args.to_dict()
 
@@ -74,7 +64,7 @@ def login_controller():
         db.session.commit()
 
         return jsonify({
-            'token': generate_jwt_token(user),
+            'token': jwt_token,
         })
     else:
         return jsonify({'error': 'Invalid Credentials'}), 401
