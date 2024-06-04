@@ -24,8 +24,8 @@ def list_all_users_controller():
 
 
 def create_account_controller():
-    request_form = request.form.to_dict()
-
+    request_form = request.get_json()
+    print(request_form)
     new_account = User(
         email=request_form.get('email'),
         password=request_form.get('password'),
@@ -39,11 +39,23 @@ def create_account_controller():
         return jsonify({"message": "User already exists"}), 400
 
     response = User.query.filter_by(email=request_form.get('email')).first().toDict()
-    return jsonify(response)
+    user = User.query.filter_by(email=request_form.get('email'), password=request_form.get("password")).first()
+
+    if user:
+        jwt_token = generate_jwt_token(user)
+        User.query.filter_by(email=request_form.get('email')).update({"jwt": jwt_token})
+        db.session.commit()
+
+        return jsonify({
+            'token': generate_jwt_token(user),
+        })
+    else:
+        return jsonify({'error': 'Invalid Credentials'}), 401
 
 
 def login_controller():
     request_form = request.args.to_dict()
+
     user = User.query.filter_by(email=request_form.get('email'), password=request_form.get("password")).first()
 
     if user:
