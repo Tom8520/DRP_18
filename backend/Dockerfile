@@ -5,7 +5,8 @@ RUN pip install --upgrade pip
 
 # get curl for healthchecks
 RUN apk add curl
-
+RUN apk add postgresql-libs
+RUN apk add gcc musl-dev postgresql-dev g++
 # permissions and nonroot user for tightened security
 RUN adduser -D nonroot
 RUN mkdir /home/app/ && chown -R nonroot:nonroot /home/app

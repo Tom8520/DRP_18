@@ -5,5 +5,5 @@ python-dotenv
 flask_migrate
 flask_sqlalchemy
 sqlalchemy
-psycopg2
+psycopg2-binary
 pyjwt
