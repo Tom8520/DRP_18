@@ -3,7 +3,7 @@ import './../styles/Login.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../components/NavBar';
 import { useNavigate } from 'react-router-dom';
-import client from '../client/client';
+import client, { setAuthToken } from '../client/client';
 
 const LoginPage = () => {
 
@@ -49,6 +49,9 @@ const LoginPage = () => {
     }
   }).then(response => {
       if (response.status === 200) {
+        const token = response.data.token;
+        localStorage.setItem("token", token);
+        setAuthToken(token);
         setLoginError('');
         setLoginSuccess(true);
       } else {
