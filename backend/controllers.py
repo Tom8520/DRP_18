@@ -25,7 +25,7 @@ def list_all_users_controller():
 
 def create_account_controller():
     request_form = request.get_json()
-    print(request_form)
+
     new_account = User(
         email=request_form.get('email'),
         password=request_form.get('password'),

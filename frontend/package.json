@@ -4,6 +4,8 @@
   "type": "module",
   "private": true,
   "dependencies": {
+    "@radix-ui/react-icons": "^1.3.0",
+    "@shadcn/ui": "^0.0.4",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -13,11 +15,16 @@
     "@types/react-dom": "^18.3.0",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
+    "class-variance-authority": "^0.7.0",
+    "lucide-react": "^0.387.0",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
+    "react-webcam": "^7.2.0",
+    "styled-components": "^6.1.11",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -33,7 +40,8 @@
       "react-app/jest"
     ],
     "rules": {
-      "jsx-a11y/img-redundant-alt": "off"
+      "jsx-a11y/img-redundant-alt": "off",
+      "@typescript-eslint/no-unused-vars": ["warn", {"argsIgnorePattern": "^_", "varsIgnorePattern": "^_"}]
     }
   },
   "browserslist": {
@@ -58,5 +66,11 @@
     "moduleNameMapper": {
       "^axios$": "axios/dist/node/axios.cjs"
     }
+  },
+  "devDependencies": {
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.2.10",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss": "^3.4.4"
   }
 }

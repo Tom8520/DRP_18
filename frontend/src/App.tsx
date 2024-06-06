@@ -6,20 +6,15 @@ import UploadImagePage from './pages/MainPage';
 import LoginPage from './pages/LoginPage';
 import ErrorPage from './pages/ErrorPage';
 import UserAccountPage from './pages/UserAccountPage';
+import { setAuthToken } from './client/client';
 
 function App() {
 
-  // const [testStuff, setTestStuff] = useState<String>("Not from backend");
-
-  // useEffect(() => {
-  //   client.get("/api").then(response => {
-  //     setTestStuff(response.data);
-  //     console.log(response.data);
-  //   }).catch(error => {
-  //     console.log("ERROR!")
-  //     console.log(error);
-  //   })
-  // })
+  const token = localStorage.getItem("token");
+  if (token) {
+    setAuthToken(token);
+  }
+ 
 
   return (
     <BrowserRouter>
