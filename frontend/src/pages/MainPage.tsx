@@ -18,7 +18,7 @@ const UploadImagePage = () => {
     }
 
     client.post("/upload", data).then(response => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         console.log("Yay");
       } else {
         console.log("Nay");
@@ -27,6 +27,7 @@ const UploadImagePage = () => {
   }
 
   const handleUploadImage: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setshowConfirmUpload(true);
     try {
       const file = e.target.files?.[0];
 
