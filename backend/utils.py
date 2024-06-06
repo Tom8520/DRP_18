@@ -6,10 +6,10 @@ import jwt
 from flask import request, jsonify
 
 
-def generate_jwt_token(user):
+def generate_jwt_token(id):
     return jwt.encode(
         {
-            'id': user.id,
+            'id': id,
             'exp': timegm((datetime.datetime.utcnow() + datetime.timedelta(hours=1)).utctimetuple()),
         },
         os.getenv('JWT_SECRET'),
@@ -35,4 +35,5 @@ def verify_jwt_token(endpoint):
 
         return endpoint(data.get('id'))
 
+    logged_in_endpoint.__name__ = endpoint.__name__
     return logged_in_endpoint
