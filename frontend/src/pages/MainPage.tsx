@@ -2,11 +2,29 @@ import React, {ChangeEventHandler,useState} from 'react';
 import './../styles/Landing.css';
 import NavBar from '../components/NavBar';
 import WebCam from '../components/WebCam';
+import client from '../client/client';
 
 const UploadImagePage = () => {
 
   const [image, setImage] = useState("");
   const [useCamera, setUseCamera] = useState(false);
+  const [showConfirmUpload, setshowConfirmUpload] = useState(false);
+
+
+  const confirmUpload = () => {
+
+    const data = {
+      file: image
+    }
+
+    client.post("/upload", data).then(response => {
+      if (response.status == 200) {
+        console.log("Yay");
+      } else {
+        console.log("Nay");
+      }
+    })
+  }
 
   const handleUploadImage: ChangeEventHandler<HTMLInputElement> = (e) => {
     try {
@@ -49,6 +67,11 @@ const UploadImagePage = () => {
         <div className="imageContainer">
           <img alt="Upload an image" src={image} className="imagePreview"/>
         </div>
+        {showConfirmUpload && 
+         <div className="button-container">
+         <button className="styled-button" onClick={confirmUpload}>Confirm Upload?</button>
+       </div>  
+        }
       </div>
     );
   };
