@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../components/NavBar';
 import client from '../client/client';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { TransitionGroup } from 'react-transition-group';
 import './../styles/UserAccount.css';
 import { Image } from '../objects/photo';
 // import testImage from './testImage.png';
@@ -16,24 +16,23 @@ const UserAccountPage = () => {
   //   // Send JWT token and retrieve data
   // } , [])
 
-  const [photos, setPhotos] = useState<Array<Image>>([]);
+  const [_photos, setPhotos] = useState<Array<Image>>([]);
   const [photoType, setPhotoType] = useState('personal');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const fetchPhotos = async () => {
+      setLoading(true);
+      try {
+        const response = await client.get(`/photos/${photoType}`);
+        setPhotos(response.data);
+      } catch (error) {
+        console.error('Error fetching photos:', error);
+      }
+      setLoading(false);
+    };
     fetchPhotos();
   }, [photoType]);
-
-  const fetchPhotos = async () => {
-    setLoading(true);
-    try {
-      const response = await client.get(`/photos/${photoType}`);
-      setPhotos(response.data);
-    } catch (error) {
-      console.error('Error fetching photos:', error);
-    }
-    setLoading(false);
-  };
 
   return (
     <div>

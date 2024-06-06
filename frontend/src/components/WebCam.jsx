@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Webcam from 'react-webcam';
-import { Dispatch, SetStateAction } from 'react';
+// import { Dispatch, SetStateAction } from 'react';
 
 const videoConstraints = {
   facingMode: "user"
@@ -15,6 +15,7 @@ function WebCam({ setShowCamera, setImageUrl }) {
       setImageUrl(imageSrc)
       setShowCamera(false)
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [webcamRef]
   );
   return (
