@@ -81,13 +81,42 @@ body {
       font-weight: 300; /* Light weight for a modern look */
       color: #333; /* Dark text color */
       padding: 10px 20px; /* Padding around the text */
-      border-bottom: 2px solid #333; /* Simple underline */
+      /* border-bottom: 2px solid #333; /* Simple underline */
       letter-spacing: 1px; /* Slight space between letters */
       transition: color 0.3s, border-color 0.3s; /* Smooth transition for hover effects */
       text-align: center;
+  }
+
+  .stylish-subheader {
+    font-size: 2em; /* Large font size */
+    font-weight: 100; /* Light weight for a modern look */
+    color: #333; /* Dark text color */
+    padding: 10px 20px; /* Padding around the text */
+    /* border-bottom: 2px solid #333; /* Simple underline */
+    letter-spacing: 1px; /* Slight space between letters */
+    transition: color 0.3s, border-color 0.3s; /* Smooth transition for hover effects */
+    text-align: center;
   }
   
   .stylish-header:hover {
       color: #555; /* Slightly lighter text color on hover */
       border-color: #555; /* Slightly lighter underline color on hover */
+  }
+
+  .instructions {
+    font-weight: 300; /* Light weight for a modern look */
+    color: #333; /* Dark text color */
+    padding: 10px 20px; /* Padding around the text */
+    border-top: 2px solid #333; /* Simple underline */
+    letter-spacing: 1px; /* Slight space between letters */
+    transition: color 0.3s, border-color 0.3s; /* Smooth transition for hover effects */
+    text-align: center;
+  }
+
+  .instructions-header {
+    font-size: 2em;
+  }
+
+  .instructions-text {
+    font-size: 1em; /* Large font size */
   }
