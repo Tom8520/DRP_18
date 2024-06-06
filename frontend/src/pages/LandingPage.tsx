@@ -4,12 +4,15 @@ import './../styles/Landing.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../components/NavBar';
 
+
 const LandingPage = () => {
 
   return (
+    <>
     <div>
       <NavBar />
       <br></br>
+      <>
       <div className="header">
         <h1 className='stylish-header'>AI Diagrameeeeeeeeeeeeeeeeeeee Tool</h1>
         <h3>Make diagrams easier to understand with the power of AI and AR.</h3>
@@ -23,9 +26,9 @@ const LandingPage = () => {
           <Link to="/main" className="styled-button">Try It Out</Link>
         </div>
       </div>
-      <div>
+      </>
       </div>
-    </div>
+      </>
   );
 };
 
