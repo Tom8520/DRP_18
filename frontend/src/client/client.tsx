@@ -1,15 +1,15 @@
 import axios from "axios";
 
-export default axios.create({
-    baseURL: process.env.REACT_APP_API_BASE_URL,
+export const client = axios.create({
+    baseURL: process.env.REACT_APP_API_BASE_URL + "/api",
 });
 
 export const setAuthToken = (token: any) => {
     if (token) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        client.defaults.headers.common["Authorization"] = `${token}`;
     }
     else
-        delete axios.defaults.headers.common["Authorization"];
+        delete client.defaults.headers.common["Authorization"];
  }
 
  export const getToken = () => {

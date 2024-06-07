@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../components/NavBar';
-import client from '../client/client';
+import {client} from '../client/client';
 import { TransitionGroup } from 'react-transition-group';
 import './../styles/UserAccount.css';
 import { Image } from '../objects/photo';

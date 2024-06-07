@@ -1,6 +1,5 @@
 import datetime
 import os
-
 from dotenv import load_dotenv
 from flask import request, jsonify
 import uuid
@@ -9,7 +8,7 @@ from sqlalchemy.exc import IntegrityError
 
 from __init__ import db
 from utils import generate_jwt_token
-from models import User
+from models import User, ImageUpload
 import jwt
 
 load_dotenv()
@@ -42,7 +41,7 @@ def create_account_controller():
     user = User.query.filter_by(email=request_form.get('email'), password=request_form.get("password")).first()
 
     if user:
-        jwt_token = generate_jwt_token(user)
+        jwt_token = generate_jwt_token(user.id)
         User.query.filter_by(email=request_form.get('email')).update({"jwt": jwt_token})
         db.session.commit()
 
@@ -59,7 +58,7 @@ def login_controller():
     user = User.query.filter_by(email=request_form.get('email'), password=request_form.get("password")).first()
 
     if user:
-        jwt_token = generate_jwt_token(user)
+        jwt_token = generate_jwt_token(user.id)
         User.query.filter_by(email=request_form.get('email')).update({"jwt": jwt_token})
         db.session.commit()
 
@@ -92,3 +91,24 @@ def delete_account_controller(user_id):
     db.session.commit()
 
     return ('Account with Id "{}" deleted successfully!').format(user_id)
+
+
+def upload_image_controller(user_id, filename):
+    upload = ImageUpload(
+        user=user_id,
+        filename=filename,
+    )
+
+    db.session.add(upload)
+
+    try:
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify({"message": "Error uploading image"}), 500
+
+
+def get_images_controller(user_id):
+    images = ImageUpload.query.filter_by(user_id=user_id)
+
+    return [image.filename for image in images.all()]

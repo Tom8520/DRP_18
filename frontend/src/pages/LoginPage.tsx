@@ -3,7 +3,7 @@ import './../styles/Login.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../components/NavBar';
 import { useNavigate } from 'react-router-dom';
-import client, { setAuthToken } from '../client/client';
+import {client, setAuthToken} from '../client/client';
 
 const LoginPage = () => {
 
@@ -87,7 +87,7 @@ const LoginPage = () => {
         <h2>Create Account</h2>
         <form onSubmit={handleSignUp}>
           <label>Email</label>
-          <input type="email" value={createAccountEmail} onChange={(e) => setCreateAccountEmail(e.target.value)} required />
+          <input type="text" value={createAccountEmail} onChange={(e) => setCreateAccountEmail(e.target.value)} required />
           <label>Password</label>
           <input type="password" value={createAccountPassword} onChange={(e) => setCreateAccountPassword(e.target.value)} required />
           <label>Organisation Code</label>
@@ -100,7 +100,7 @@ const LoginPage = () => {
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
           <label>Email</label>
-          <input type="email" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} required />
+          <input type="text" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} required />
           <label>Password</label>
           <input type="password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required />
           {!loginSuccess && <p className="error_text">{loginError}</p>}

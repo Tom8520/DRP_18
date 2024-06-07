@@ -7,3 +7,4 @@ flask_sqlalchemy
 sqlalchemy
 psycopg2-binary
 pyjwt
+boto3

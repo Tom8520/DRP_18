@@ -2,22 +2,25 @@ import React, {ChangeEventHandler,useState} from 'react';
 import './../styles/Landing.css';
 import NavBar from '../components/NavBar';
 import WebCam from '../components/WebCam';
-import client from '../client/client';
+import {client} from '../client/client';
 
 const UploadImagePage = () => {
 
   const [image, setImage] = useState("");
+  const [file, setFile] = useState(null);
   const [useCamera, setUseCamera] = useState(false);
   const [showConfirmUpload, setshowConfirmUpload] = useState(false);
 
 
   const confirmUpload = () => {
 
-    const data = {
-      file: image
-    }
+    let formData = new FormData();
+    // @ts-ignore
+    formData.append("file", file);
 
-    client.post("/upload", data).then(response => {
+    client.post("/upload", formData, {headers: {
+      'Content-Type': 'multipart/form-data'
+    }}).then(response => {
       if (response.status === 200) {
         console.log("Yay");
       } else {
@@ -30,6 +33,8 @@ const UploadImagePage = () => {
     setshowConfirmUpload(true);
     try {
       const file = e.target.files?.[0];
+      // @ts-ignore
+      setFile(file);
 
       if (file) {
         const reader = new FileReader();
