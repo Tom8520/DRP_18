@@ -1,11 +1,11 @@
 #!/bin/sh
 
 # Check if Docker Compose is running any containers
-containers_running=$(cd $DOCKER_COMPOSE_DIR && docker-compose ps -q)
+cd /home/ec2-user
+containers_running=$(docker-compose ps -q)
 
 if [ -n "$containers_running" ]; then
     echo "Stopping Docker containers..."
-    cd /home/ec2-user
     docker-compose down
     echo "Docker containers stopped."
 else
