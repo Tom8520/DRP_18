@@ -1,10 +1,11 @@
+import base64
 import os
-from flask import request, jsonify
+from flask import request, jsonify, send_file
 from flask_cors import CORS, cross_origin
 
 from utils import verify_jwt_token, generate_jwt_token
 from controllers import list_all_users_controller, create_account_controller, login_controller, upload_image_controller, \
-    get_images_controller
+    get_images_controller, verify_image_owner
 from __init__ import create_app
 from dotenv import load_dotenv
 import boto3
@@ -82,7 +83,21 @@ def get_images(user):
 @cross_origin(supports_credentials=True)
 @verify_jwt_token
 def download_image(user):
-    pass
+    filename = request.args.get("filename")
+
+    if filename is None:
+        return jsonify({"message": "no filename"}), 400
+
+    if not verify_image_owner(user, filename):
+        return jsonify({"message": "unauthorized"}), 401
+
+    with open(f'tmp/{user}.png', 'wb') as f:
+        s3.download_fileobj(os.getenv("S3_BUCKET_NAME"), filename, f)
+
+    with open(f'tmp/{user}.png', 'rb') as image_file:
+        encoded_string = base64.b64encode(image_file.read()).decode('utf-8')
+
+    return jsonify({'image': encoded_string})
 
 
 @app.route("/api/secret", methods=['GET', 'POST'])

@@ -90,7 +90,7 @@ def delete_account_controller(user_id):
     User.query.filter_by(id=user_id).delete()
     db.session.commit()
 
-    return ('Account with Id "{}" deleted successfully!').format(user_id)
+    return 'Account with Id "{}" deleted successfully!'.format(user_id)
 
 
 def upload_image_controller(user_id, filename):
@@ -109,6 +109,12 @@ def upload_image_controller(user_id, filename):
 
 
 def get_images_controller(user_id):
-    images = ImageUpload.query.filter_by(user_id=user_id)
+    images = ImageUpload.query.filter_by(user=user_id)
 
     return [image.filename for image in images.all()]
+
+
+def verify_image_owner(user_id, filename):
+    images = ImageUpload.query.filter_by(user=user_id, filename=filename)
+
+    return images.count() > 0
