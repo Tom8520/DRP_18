@@ -11,14 +11,18 @@ const UserAccountPage = () => {
 
   const [imgUrls, setImgUrls] = useState([]);
   const [photos, setPhotos] = useState<Array<string>>([]);
-  const [photoType, setPhotoType] = useState('');
+  const [photoType, setPhotoType] = useState('Personal');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPhotos = async () => {
       setLoading(true);
       try {
-        const response = await client.get(`/getImages`);
+        console.log(photoType);
+        const response = await client.get(`/getImages`, {params: {
+          type: photoType 
+        }});
+        console.log(response);
         setImgUrls(response.data.images);
         let newPhotos = [];
         for (let img of imgUrls) {
@@ -44,8 +48,8 @@ const UserAccountPage = () => {
   }, [photoType]);
 
   useEffect(() => {
-    setPhotoType('organisation');
-    setPhotoType('personal');
+    setPhotoType('Organisation');
+    setPhotoType('Personal');
   }, []);
 
   return (
@@ -59,16 +63,16 @@ const UserAccountPage = () => {
       <div className="photo-container">
         <div className="toggle-buttons">
           <button
-            className={photoType === 'personal' ? 'active' : ''}
-            onClick={() => setPhotoType('personal')}
-          >
-            Personal
-          </button>
-          <button
-            className={photoType === 'organisation' ? 'active' : ''}
-            onClick={() => setPhotoType('organisation')}
+            className={photoType === 'Personal' ? 'active' : ''}
+            onClick={() => setPhotoType('Personal')}
           >
             Organisation
+          </button>
+          <button
+            className={photoType === 'Organisation' ? 'active' : ''}
+            onClick={() => setPhotoType('Organisation')}
+          >
+            Personal
           </button>
         </div>
         {loading ? (

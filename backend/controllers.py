@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from flask import request, jsonify
 import uuid
 
+from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
 from __init__ import db
@@ -28,6 +29,7 @@ def create_account_controller():
     new_account = User(
         email=request_form.get('email'),
         password=request_form.get('password'),
+        org_code=request_form.get('orgCode')
     )
     db.session.add(new_account)
 
@@ -46,7 +48,7 @@ def create_account_controller():
         db.session.commit()
 
         return jsonify({
-            'token': generate_jwt_token(user),
+            'token': jwt_token,
         })
     else:
         return jsonify({'error': 'Invalid Credentials'}), 401
@@ -95,7 +97,7 @@ def delete_account_controller(user_id):
 
 def upload_image_controller(user_id, filename):
     upload = ImageUpload(
-        user=user_id,
+        user_id=user_id,
         filename=filename,
     )
 
@@ -108,13 +110,24 @@ def upload_image_controller(user_id, filename):
         return jsonify({"message": "Error uploading image"}), 500
 
 
-def get_images_controller(user_id):
-    images = ImageUpload.query.filter_by(user=user_id)
-
+def get_images_controller(user_id, typ):
+    if typ == "Personal":
+        images = ImageUpload.query.filter_by(user_id=user_id)
+    else:
+        return get_organization_images_controller(user_id)
     return [image.filename for image in images.all()]
 
 
 def verify_image_owner(user_id, filename):
-    images = ImageUpload.query.filter_by(user=user_id, filename=filename)
+    images = ImageUpload.query.filter_by(user_id=user_id, filename=filename)
 
     return images.count() > 0
+
+
+def get_organization_images_controller(user_id):
+    orgCode = User.query.filter_by(id=user_id).first().org_code
+
+    images = db.session.execute(select(ImageUpload.filename).join(User, User.id == ImageUpload.user_id).where(
+        ImageUpload.shared == True).where(User.org_code == orgCode)).all()
+
+    return [image.filename for image in images]

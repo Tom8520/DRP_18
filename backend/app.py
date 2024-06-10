@@ -74,7 +74,8 @@ def upload_image(user):
 @cross_origin(supports_credentials=True)
 @verify_jwt_token
 def get_images(user):
-    images = get_images_controller(user)
+    typ = request.args.get("type")
+    images = get_images_controller(user, typ)
 
     return jsonify({"images": images})
 
