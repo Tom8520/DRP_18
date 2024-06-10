@@ -1,7 +1,7 @@
 FROM python:3.9.2-alpine
 
 # upgrade pip
-RUN pip install --upgrade pip
+RUN pip install --upgrade pip setuptools wheel
 
 # get curl for healthchecks
 RUN apk add curl
@@ -25,7 +25,7 @@ ENV VIRTUAL_ENV=/home/app/venv
 RUN python -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 RUN export FLASK_APP=app.py
-RUN pip install -r requirements.txt
+RUN pip install wheel && pip install -r requirements.txt
 
 # define the port number the container should expose
 EXPOSE 8000
