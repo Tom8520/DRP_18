@@ -12,11 +12,12 @@ const UploadImagePage = () => {
   const [showConfirmUpload, setshowConfirmUpload] = useState(false);
 
 
-  const confirmUpload = () => {
+  const confirmUpload = (organisation: Boolean) => {
 
     let formData = new FormData();
     // @ts-ignore
     formData.append("file", file);
+    formData.append("organisation", organisation ? "true" : "false");
 
     client.post("/upload", formData, {headers: {
       'Content-Type': 'multipart/form-data'
@@ -73,13 +74,14 @@ const UploadImagePage = () => {
         <div className="imageContainer">
           <img alt="Upload an image" src={image} className="imagePreview"/>
         </div>
-        {showConfirmUpload && 
-         <div className="button-container">
-         <button className="styled-button" onClick={confirmUpload}>Confirm Upload?</button>
-       </div>  
+        {showConfirmUpload &&
+            <div className="button-container">
+              <button className="styled-button" onClick={() => confirmUpload(false)}>Upload</button>
+              <button className="styled-button" onClick={() => confirmUpload(true)}>Upload to organisation</button>
+            </div>
         }
       </div>
-    );
-  };
+  );
+};
 
 export default UploadImagePage;

@@ -43,29 +43,18 @@ def login():
 @cross_origin(supports_credentials=True)
 @verify_jwt_token
 def upload_image(user):
-    print("1")
     file = request.files.get('file')
-    print(request.files)
-    print(request.form)
-    print("2")
+    shared = request.form.get('organisation')
 
-    if file is None:
+    if file is None or shared is None:
         return jsonify({"message": "no file found"}), 400
-
-    print("3")
 
     file.save(f"tmp/{user}.{file.filename.split('.')[-1]}")
 
-    print("4")
-
     s3_filename = generate_jwt_token(user) + ".png"
 
-    print("5")
-
     s3.upload_file(f"tmp/{user}.{file.filename.split('.')[-1]}", os.getenv("S3_BUCKET_NAME"), s3_filename)
-    print("6")
-    upload_image_controller(user, s3_filename)
-    print("7")
+    upload_image_controller(user, s3_filename, True if shared == "true" else False)
 
     return jsonify({"message": "uploaded successfully"}), 200
 
