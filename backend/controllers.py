@@ -95,10 +95,11 @@ def delete_account_controller(user_id):
     return 'Account with Id "{}" deleted successfully!'.format(user_id)
 
 
-def upload_image_controller(user_id, filename):
+def upload_image_controller(user_id, filename, shared):
     upload = ImageUpload(
         user_id=user_id,
         filename=filename,
+        shared=shared
     )
 
     db.session.add(upload)
@@ -121,7 +122,14 @@ def get_images_controller(user_id, typ):
 def verify_image_owner(user_id, filename):
     images = ImageUpload.query.filter_by(user_id=user_id, filename=filename)
 
-    return images.count() > 0
+    if images.count() > 0:
+        return True
+
+    orgCode = User.query.filter_by(id=user_id).first().org_code
+    images = db.session.execute(select(ImageUpload.filename).join(User, User.id == ImageUpload.user_id).where(
+        ImageUpload.shared == True).where(User.org_code == orgCode).where(ImageUpload.filename == filename)).all()
+
+    return len(images) > 0
 
 
 def get_organization_images_controller(user_id):
