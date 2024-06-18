@@ -12,7 +12,7 @@ const UploadImagePage = () => {
   const [useCamera, setUseCamera] = useState(false);
   const [showConfirmUpload, setshowConfirmUpload] = useState(false);
   const [comments, setComments] = useState<Array<string>>([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, _] = useSearchParams();
   const [comment, setComment] = useState("");
   const [timer, setTimer] = useState(true);
   const filename = searchParams.get("filename");
@@ -58,7 +58,7 @@ const UploadImagePage = () => {
     }
   }
 
-  const saveComment: MouseEventHandler = async (e) => {
+  const saveComment: MouseEventHandler = async (_) => {
 
     let formData = new FormData();
     formData.append("comment", comment);
@@ -147,7 +147,7 @@ const UploadImagePage = () => {
         {filename != null && <>
           <div className={"comments-container"}>
             {comments.map((comment) => {
-              if (comment == "") {
+              if (comment === "") {
                 return <></>
               }
               return <div className="comment-div">

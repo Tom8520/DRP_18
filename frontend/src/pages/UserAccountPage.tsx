@@ -82,7 +82,7 @@ const UserAccountPage = () => {
           <TransitionGroup className="photo-grid">
             {photos.map((photo) => (
               <div className="photo-item">
-                <Link to={"/main?filename=" + photo [1]}><img src={photo [0]} alt={`Photo `}/></Link>
+                <Link to={"/main?filename=" + photo[1]}><img src={photo[0]} alt={`Photo `}/></Link>
               </div>
             ))}
           </TransitionGroup>
