@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../components/NavBar';
 import {client} from '../client/client';
 import { TransitionGroup } from 'react-transition-group';
 import './../styles/UserAccount.css';
+import {Link} from "react-router-dom";
 
 const UserAccountPage = () => {
 
   const [username] = useState('')
 
   const [imgUrls, setImgUrls] = useState([]);
-  const [photos, setPhotos] = useState<Array<string>>([]);
+  const [photos, setPhotos] = useState<Array<Array<string>>>([]);
   const [photoType, setPhotoType] = useState('Personal');
   const [loading, setLoading] = useState(true);
 
@@ -34,7 +35,7 @@ const UserAccountPage = () => {
           // @ts-ignore
           let binary = `data:image/png;base64,${response2.data.image}`;
 
-          newPhotos.push(binary);
+          newPhotos.push([binary, img]);
         }
         setPhotos(newPhotos);
         console.log(photos);
@@ -81,7 +82,7 @@ const UserAccountPage = () => {
           <TransitionGroup className="photo-grid">
             {photos.map((photo) => (
               <div className="photo-item">
-                <img src={photo} alt={`Photo `} />
+                <Link to={"/main?filename=" + photo[1]}><img src={photo[0]} alt={`Photo `}/></Link>
               </div>
             ))}
           </TransitionGroup>
