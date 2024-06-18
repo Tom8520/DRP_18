@@ -1,3 +1,4 @@
 #!/bin/sh
 cd /home/ec2-user
+aws s3 cp --region=eu-north-1 "s3://dep18/.env" "/home/ec2-user/backend/.env"
 docker-compose up -d --build
